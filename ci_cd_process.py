@@ -1,2 +1,4 @@
 # Databricks notebook source
-# CI/CD Process
+x=10
+y=20
+print(x+y)
