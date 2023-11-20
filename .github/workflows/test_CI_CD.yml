@@ -24,7 +24,7 @@ jobs:
 
     - name: Import Notebooks to Databricks
       run: |
-        databricks workspace import_dir . /"C:/User/ShyamKumarR/Downloads/ci_cd.py"
+        databricks workspace import_dir . file:/C:/User/ShyamKumarR/Downloads/ci_cd.py
 
     # - name: Configure Databricks Secrets
     #   run: |
@@ -32,4 +32,4 @@ jobs:
 
     - name: Run Databricks Notebook
       run: |
-        databricks workspace run-notebook /"C:/User/ShyamKumarR/Downloads/ci_cd.py"/NotebookName
+        databricks workspace run-notebook /file:/C:/User/ShyamKumarR/Downloads/ci_cd.py
