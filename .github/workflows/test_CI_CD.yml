@@ -26,6 +26,14 @@ jobs:
       run: |
         databricks workspace import_dir . file:/C:/User/ShyamKumarR/Downloads/ci_cd.py
 
+    - name: Configure Databricks CLI
+      run: |
+        echo -e "host $DATABRICKS_HOST\nusername $DATABRICKS_USERNAME\npassword $DATABRICKS_PASSWORD" > ~/.databrickscfg
+      env:
+        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+        DATABRICKS_USERNAME: ${{ secrets.DATABRICKS_USERNAME }}
+        DATABRICKS_PASSWORD: ${{ secrets.DATABRICKS_PASSWORD }}
+
     # - name: Configure Databricks Secrets
     #   run: |
     #     databricks secrets create --scope <scope> --key <key> --string-value <value>
