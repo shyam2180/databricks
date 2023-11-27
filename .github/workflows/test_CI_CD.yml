@@ -24,7 +24,7 @@ jobs:
 
     - name: Configure Databricks CLI
       run: |
-        /opt/hostedtoolcache/Python/3.8.18/x64/bin/databricks configure --token
+        echo -e "${{ secrets.DATABRICKS_HOST }}\n${{ secrets.DATABRICKS_USERNAME }}\n${{ secrets.DATABRICKS_PASSWORD }}" | /opt/hostedtoolcache/Python/3.8.18/x64/bin/databricks configure --token
       env:
         DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
         DATABRICKS_USERNAME: ${{ secrets.DATABRICKS_USERNAME }}
