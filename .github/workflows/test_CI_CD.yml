@@ -31,7 +31,7 @@ jobs:
         DATABRICKS_PASSWORD: ${{ secrets.DATABRICKS_PASSWORD }}
 
     - name: Verify Databricks CLI Configuration
-      run: databricks configure --get
+      run: databricks configure --list
 
     - name: Import Notebooks to Databricks
       run: |
