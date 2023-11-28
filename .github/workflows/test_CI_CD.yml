@@ -24,10 +24,16 @@ jobs:
 
     - name: Configure Databricks CLI
       run: |
-        echo -e "${{ secrets.DATABRICKS_HOST }}\n${{ secrets.DATABRICKS_TOKEN }}" | databricks configure --token
+        echo -e "${{ secrets.DATABRICKS_HOST }}\n${{ secrets.DATABRICKS_USERNAME }}\n${{ secrets.DATABRICKS_PASSWORD }}" | databricks configure --token
       env:
         DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
-        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        DATABRICKS_USERNAME: ${{ secrets.DATABRICKS_USERNAME }}
+        DATABRICKS_PASSWORD: ${{ secrets.DATABRICKS_PASSWORD }}
+
+    - name: Debug Token and Host
+      run: |
+        echo "DATABRICKS_TOKEN=${{ secrets.DATABRICKS_TOKEN }}"
+        echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_HOST }}"
 
     - name: Verify Databricks CLI Configuration
       run: cat $HOME/.databrickscfg
