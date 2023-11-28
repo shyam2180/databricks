@@ -40,7 +40,7 @@ jobs:
 
     - name: Import Notebooks to Databricks
       run: |
-        databricks workspace import . C:/Users/ShyamKumarR/Downloads/ci_cd.py /path/in/databricks/workspace/ci_cd
+        databricks workspace import . /Users/ShyamKumarR/Downloads/ci_cd.py /path/in/databricks/workspace/ci_cd
 
     - name: Run Databricks Notebook
       run: |
