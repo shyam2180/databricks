@@ -30,8 +30,13 @@ jobs:
         DATABRICKS_USERNAME: ${{ secrets.DATABRICKS_USERNAME }}
         DATABRICKS_PASSWORD: ${{ secrets.DATABRICKS_PASSWORD }}
 
+    - name: Debug Token and Host
+      run: |
+        echo "DATABRICKS_TOKEN=${{ secrets.DATABRICKS_TOKEN }}"
+        echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_HOST }}"
+
     - name: Verify Databricks CLI Configuration
-      run: cat $HOME/.databrickscfg  # Assuming the config file is in the home directory
+      run: cat $HOME/.databrickscfg
 
     - name: Import Notebooks to Databricks
       run: |
