@@ -40,7 +40,7 @@ jobs:
 
     - name: Import Notebooks to Databricks
       run: |
-        databricks workspace import --language PYTHON 'C:\\Users\\ShyamKumarR\\Downloads\\test_cicd_output\\ci_cd.py' /path/in/databricks/workspace/ci_cd
+        databricks workspace import --language PYTHON 'C:/Users/ShyamKumarR/Downloads/test_cicd_output/ci_cd.py' /path/in/databricks/workspace/ci_cd
 
     - name: Run Databricks Notebook
       run: |
