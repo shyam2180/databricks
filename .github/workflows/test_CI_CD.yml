@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      CI_CD_PATH: ${{ github.workspace }}/path/to/ci_cd.py
+      CI_CD_PATH: path/to/ci_cd.py
 
     steps:
     - name: Checkout code
