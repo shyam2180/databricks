@@ -36,7 +36,7 @@ jobs:
         echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_HOST }}"
 
     - name: Verify Databricks CLI Configuration
-      run: cat $HOME\.databrickscfg
+      run: cat $HOME/.databrickscfg
 
     - name: Import Notebooks to Databricks
       run: |
