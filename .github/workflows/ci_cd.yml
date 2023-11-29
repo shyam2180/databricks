@@ -34,8 +34,14 @@ jobs:
       run: |
         # Replace '/Workspace/Folder/Path' with the actual path in your Databricks workspace
         # Replace 'local/path/to/your/notebook' with the actual path to your notebook file
-        databricks workspace import -l PYTHON /Repos/shyamkumarr@jmangroup.com/databricks/cicd "C:\Users\ShyamKumarR\OneDrive - JMAN Group Ltd\Desktop\test_cicd_output\ci_cd.py"
- 
+        
+        # Set variables for Databricks workspace and local notebook path
+        DATABRICKS_PATH="/Repos/shyamkumarr@jmangroup.com/databricks/cicd"
+        LOCAL_NOTEBOOK_PATH="C:\\Users\\ShyamKumarR\\OneDrive - JMAN Group Ltd\\Desktop\\test_cicd_output\\ci_cd.py"
+        
+        # Import notebook to Databricks workspace
+        databricks workspace import -l PYTHON "$DATABRICKS_PATH" "$LOCAL_NOTEBOOK_PATH"
+
     - name: Run Databricks Notebook
       run: |
         databricks workspace create --name 'MyJob' --folder '/Workspace/Folder/Path' --format SOURCE --language SOURCE --overwrite
