@@ -45,8 +45,8 @@ jobs:
 
     - name: Import Notebooks to Databricks
       run: |
-        databricks workspace import --language PYTHON "${{ env.CI_CD_PATH }}" /path/in/databricks/workspace/ci_cd
+        databricks workspace import --language PYTHON "${{ env.CI_CD_PATH }}" /path/in/databricks/workspace/ci_cd.py
 
     - name: Run Databricks Notebook
       run: |
-        databricks workspace run-notebook /path/in/databricks/workspace/ci_cd
+        databricks workspace run-notebook /path/in/databricks/workspace/ci_cd.py
