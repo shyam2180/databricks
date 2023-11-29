@@ -40,6 +40,9 @@ jobs:
     - name: Verify Databricks CLI Configuration
       run: cat $HOME/.databrickscfg
 
+    - name: List files in the working directory
+      run: ls -R
+
     - name: Import Notebooks to Databricks
       run: |
         databricks workspace import --language PYTHON "${{ env.CI_CD_PATH }}" /path/in/databricks/workspace/ci_cd
