@@ -8,8 +8,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     env:
-          CI_CD_PATH: 'C:\Users\ShyamKumarR\Downloads\test_cicd_output\ci_cd.py'
+      CI_CD_PATH: ${{ github.workspace }}/path/to/ci_cd.py
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -18,7 +20,6 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.8
-
 
     - name: Install Databricks CLI
       run: |
@@ -45,4 +46,4 @@ jobs:
 
     - name: Run Databricks Notebook
       run: |
-        databricks workspace run-notebook \path\in\databricks\workspace\ci_cd
+        databricks workspace run-notebook /path/in/databricks/workspace/ci_cd
