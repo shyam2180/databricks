@@ -34,7 +34,7 @@ jobs:
       run: |
         # Replace '/Workspace/Folder/Path' with the actual path in your Databricks workspace
         # Replace 'local/path/to/your/notebook' with the actual path to your notebook file
-        databricks workspace import -l /Workspace/cicd -o "C:\Users\ShyamKumarR\OneDrive - JMAN Group Ltd\Desktop\test_cicd_output\ci_cd.py"
+        databricks workspace import -l /Repos/shyamkumarr@jmangroup.com/databricks/cicd "C:\Users\ShyamKumarR\OneDrive - JMAN Group Ltd\Desktop\test_cicd_output\ci_cd.py"
  
     - name: Run Databricks Notebook
       run: |
