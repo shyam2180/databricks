@@ -11,11 +11,24 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
  
-    - name: Set up Databricks CLI
+    - name: Install Databricks CLI
       run: |
         pip install databricks-cli
-        export DATABRICKS_TOKEN=${{ secrets.DATABRICKS_TOKEN }}
-        databricks configure --token
+
+    - name: Configure Databricks CLI
+      run: |
+          echo -e "${{ secrets.DATABRICKS_HOST }}\n${{ secrets.DATABRICKS_TOKEN }}" | databricks configure --token
+      env:
+        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
+    - name: Debug Token and Host
+      run: |
+        echo "DATABRICKS_TOKEN=${{ secrets.DATABRICKS_TOKEN }}"
+        echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_HOST }}"
+
+    - name: Verify Databricks CLI Configuration
+      run: cat $HOME/.databrickscfg
  
     - name: Upload Notebook to Databricks
       run: |
