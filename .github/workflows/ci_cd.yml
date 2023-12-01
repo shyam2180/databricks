@@ -14,6 +14,7 @@ jobs:
       - name: Install Databricks CLI
         run: |
           pip install databricks-cli
+          pip install --upgrade urllib3 chardet
 
       - name: Configure Databricks CLI
         run: |
