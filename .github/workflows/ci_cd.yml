@@ -44,6 +44,7 @@ jobs:
       - name: Upload Notebook to Databricks
         run: |     
           # Set variables for Databricks workspace and local notebook path
+          DATABRICKS_ORG_NAME="dbc-ff4a8e7c-a0e4"
           DATABRICKS_REPO_ID="631067110314897"
           DATABRICKS_FOLDER_ID="1489231999995469"
           LOCAL_NOTEBOOK_PATH="C:\\Users\\ShyamKumarR\\OneDrive - JMAN Group Ltd\\Desktop\\test_cicd_output\\ci_cd.py"
@@ -51,5 +52,8 @@ jobs:
           # Replace forward slashes with escaped forward slashes for Windows paths
           LOCAL_NOTEBOOK_PATH="${LOCAL_NOTEBOOK_PATH//\//\\}"
 
+           # Create necessary directories in Databricks workspace
+          databricks workspace mkdirs "/Workspace/$DATABRICKS_ORG_NAME/$DATABRICKS_REPO_ID/Folder/$DATABRICKS_FOLDER_ID"
+          
           # Import notebook to Databricks workspace
-          databricks workspace import -l PYTHON "/MyWorkspace/$DATABRICKS_REPO_ID/Folder/$DATABRICKS_FOLDER_ID" "$LOCAL_NOTEBOOK_PATH"
+          databricks workspace import -l PYTHON "/Workspace/$DATABRICKS_ORG_NAME/$DATABRICKS_REPO_ID/Folder/$DATABRICKS_FOLDER_ID" "$LOCAL_NOTEBOOK_PATH"
