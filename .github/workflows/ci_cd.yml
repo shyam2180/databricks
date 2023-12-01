@@ -43,10 +43,10 @@ jobs:
       run: cat $HOME/.databrickscfg
       
     - name: Check File Existence
-      run: test -f "C:/Users/ShyamKumarR/test_cicd_output/ci_cd.py" && echo "File exists" || echo "File does not exist"
+      run: test -f "C:\Users\ShyamKumarR\test_cicd_output\ci_cd.py" && echo "File exists" || echo "File does not exist"
 
     - name: Display Local File Content
-      run: Get-Content "C:/Users/ShyamKumarR/test_cicd_output/ci_cd.py"
+      run: Get-Content "C:\Users\ShyamKumarR\test_cicd_output\ci_cd.py"
       shell: pwsh
 
 
