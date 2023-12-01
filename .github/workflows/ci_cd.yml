@@ -53,7 +53,7 @@ jobs:
           LOCAL_NOTEBOOK_PATH="${LOCAL_NOTEBOOK_PATH//\//\\}"
 
            # Create necessary directories in Databricks workspace
-          databricks workspace mkdirs "/Workspace/$DATABRICKS_ORG_NAME/$DATABRICKS_REPO_ID/Folder/$DATABRICKS_FOLDER_ID"
+          databricks workspace mkdirs "/MyWorkspace/$DATABRICKS_ORG_NAME/$DATABRICKS_REPO_ID/Folder/$DATABRICKS_FOLDER_ID"
           
           # Import notebook to Databricks workspace
-          databricks workspace import -l PYTHON "/Workspace/$DATABRICKS_ORG_NAME/$DATABRICKS_REPO_ID/Folder/$DATABRICKS_FOLDER_ID" "$LOCAL_NOTEBOOK_PATH"
+          databricks workspace import -l PYTHON "/MyWorkspace/$DATABRICKS_ORG_NAME/$DATABRICKS_REPO_ID/Folder/$DATABRICKS_FOLDER_ID" "$LOCAL_NOTEBOOK_PATH"
