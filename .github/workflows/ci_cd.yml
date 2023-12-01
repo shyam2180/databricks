@@ -51,5 +51,11 @@ jobs:
           # Replace forward slashes with escaped forward slashes for Windows paths
           LOCAL_NOTEBOOK_PATH="${LOCAL_NOTEBOOK_PATH//\//\\}"
           
+          # Create the Databricks workspace path
+          DATABRICKS_PATH="/Workspace/$DATABRICKS_REPO_ID/Folder/$DATABRICKS_FOLDER_ID"
+          
+          # Ensure the Databricks workspace path exists
+          mkdir -p "$DATABRICKS_PATH"
+          
           # Import notebook to Databricks workspace
-          databricks workspace import -l PYTHON "/Workspace/${DATABRICKS_REPO_ID}/Folder/${DATABRICKS_FOLDER_ID}" "$LOCAL_NOTEBOOK_PATH"
+          databricks workspace import -l PYTHON "$DATABRICKS_PATH" "$LOCAL_NOTEBOOK_PATH"
