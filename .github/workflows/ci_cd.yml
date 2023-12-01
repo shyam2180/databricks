@@ -71,7 +71,7 @@ jobs:
           echo "Content of workspace: $(ls -al $WORKSPACE_PATH)"
 
           # Import notebook to Databricks workspace
-          databricks workspace import -l PYTHON "$LOCAL_NOTEBOOK_PATH" "$GITHUB_WORKSPACE" 
+          databricks workspace import -l PYTHON "." "$LOCAL_NOTEBOOK_PATH"
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
