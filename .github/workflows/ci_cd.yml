@@ -8,9 +8,6 @@ jobs:
     runs-on: ubuntu-latest
  
     steps:
-    - name: Cache
-      uses: actions/cache@v3.3.2
-
     - name: Checkout repository
       uses: actions/checkout@v2
  
