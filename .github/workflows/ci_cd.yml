@@ -1,5 +1,3 @@
-name: Databricks CI
-
 on:
   push:
     branches:
@@ -7,57 +5,51 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
-    env:
-          CI_CD_PATH: 'C:\Users\ShyamKumarR\test_cicd_output\ci_cd.py'
+    runs-on: ubuntu-latest
+    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
+      - name: Install compatible urllib3 and chardet versions
+        run: |
+          pip install urllib3==1.26.7 chardet==4.0.0
+      - name: Install Databricks CLI
+        run: |
+          pip install databricks-cli
+      - name: Configure Databricks CLI
+        run: |
+          echo -e "${{ secrets.DATABRICKS_HOST }}\n${{ secrets.DATABRICKS_TOKEN }}" | databricks configure --token
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
 
-
-    - name: Install Databricks CLI
-      run: |
-        pip install databricks-cli
-
-    - name: Configure Databricks CLI
-      run: |
-        $localDatabricksCfg = "C:\Users\ShyamKumarR\.databrickscfg"
-        $githubActionsDatabricksCfg = "$env:USERPROFILE\.databrickscfg"
-    
-        # Check if the local .databrickscfg file exists before copying
-        if (Test-Path $localDatabricksCfg) {
-            # Copy the existing .databrickscfg file from your local environment
-            Copy-Item -Path $localDatabricksCfg -Destination $githubActionsDatabricksCfg -Force
-    
-            # Run the databricks configure command using the copied .databrickscfg file
-            databricks configure --token
-        } else {
-            Write-Host "Error: Local .databrickscfg file not found."
-        }
-      env:
-        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
-        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-
-
-
-
-    - name: Debug Token and Host
-      run: |
-        echo "DATABRICKS_TOKEN=${{ secrets.DATABRICKS_TOKEN }}"
-        echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_HOST }}"
-
-    - name: Verify Databricks CLI Configuration
-      run: cat $HOME/.databrickscfg
-
-    - name: Import Notebooks to Databricks
-      run: |
-        databricks workspace import --language PYTHON "${{ env.CI_CD_PATH }}" /path/in/databricks/workspace/ci_cd
-
-    - name: Run Databricks Notebook
-      run: |
-        databricks workspace run-notebook \path\in\databricks\workspace\ci_cd
+      - name: Debug Token and Host
+        run: |
+          echo "DATABRICKS_TOKEN=${{ secrets.DATABRICKS_TOKEN }}"
+          echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_HOST }}"
+      - name: Verify Databricks CLI Configuration
+        run: cat $HOME/.databrickscfg
+      
+      - name: Debug Working Directory
+        run: |
+          pwd
+      - name: Debug Root Directory Contents
+        run: ls -al
+        
+      - name: Upload Notebook to Databricks
+        run: |     
+          # Set variables for Databricks workspace and local notebook path
+          DATABRICKS_ORG_NAME="dbc-ff4a8e7c-a0e4"
+          DATABRICKS_REPO_ID="631067110314897"
+          DATABRICKS_FOLDER_ID="1489231999995469"
+          LOCAL_NOTEBOOK_PATH="C:\\Users\\ShyamKumarR\\OneDrive - JMAN Group Ltd\\Desktop\\test_cicd_output\\ci_cd.py"
+          
+          # Replace forward slashes with escaped forward slashes for Windows paths
+          LOCAL_NOTEBOOK_PATH="${LOCAL_NOTEBOOK_PATH//\//\\}"
+          
+          # Create necessary directories in the GitHub Actions workspace
+          mkdir -p "$GITHUB_WORKSPACE/MyWorkspace/$DATABRICKS_ORG_NAME/$DATABRICKS_REPO_ID/Folder/$DATABRICKS_FOLDER_ID"
+          
+          # Import notebook to Databricks workspace
+          databricks workspace import -l PYTHON "/MyWorkspace/$DATABRICKS_ORG_NAME/$DATABRICKS_REPO_ID/Folder/$DATABRICKS_FOLDER_ID" "$LOCAL_NOTEBOOK_PATH"
