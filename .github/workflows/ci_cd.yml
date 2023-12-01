@@ -41,7 +41,10 @@ jobs:
         echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_HOST }}"
     - name: Verify Databricks CLI Configuration
       run: cat $HOME/.databrickscfg
-    
+      
+    - name: Display Local File Content
+      run: cat C:/Users/ShyamKumarR/local_notebook.py
+
     - name: Update Databricks Notebook
       run: |
         # Assuming 'workspace:/path/to/notebook' is the notebook path in Databricks
