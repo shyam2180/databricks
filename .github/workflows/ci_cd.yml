@@ -11,10 +11,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Install compatible urllib3 and chardet versions
+        run: |
+          pip install urllib3==1.26.7 chardet==4.0.0
+
       - name: Install Databricks CLI
         run: |
           pip install databricks-cli
-          pip install --upgrade urllib3 chardet
 
       - name: Configure Databricks CLI
         run: |
