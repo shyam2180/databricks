@@ -51,9 +51,9 @@ jobs:
           
           # Replace forward slashes with escaped forward slashes for Windows paths
           LOCAL_NOTEBOOK_PATH="${LOCAL_NOTEBOOK_PATH//\//\\}"
-      
+          
           # Create necessary directories in the GitHub Actions workspace
           mkdir -p "$GITHUB_WORKSPACE/MyWorkspace/$DATABRICKS_ORG_NAME/$DATABRICKS_REPO_ID/Folder/$DATABRICKS_FOLDER_ID"
-      
+          
           # Import notebook to Databricks workspace
           databricks workspace import -l PYTHON "/MyWorkspace/$DATABRICKS_ORG_NAME/$DATABRICKS_REPO_ID/Folder/$DATABRICKS_FOLDER_ID" "$LOCAL_NOTEBOOK_PATH"
