@@ -46,8 +46,8 @@ jobs:
       run: |
         # Assuming 'workspace:/path/to/notebook' is the notebook path in Databricks
         # and 'C:/Users/ShyamKumarR/local_notebook.py' is the local file
-        databricks workspace export -o "/C/Users/ShyamKumarR/test_cicd_output/ci_cd.py" "workspace:/Users/shyamkumarr@jmangroup.com/cicd"
         databricks workspace import -o "/C/Users/ShyamKumarR/test_cicd_output/ci_cd.py" "workspace:/Users/shyamkumarr@jmangroup.com/cicd"
+# databricks workspace export -o "/C/Users/ShyamKumarR/test_cicd_output/ci_cd.py" "workspace:/Users/shyamkumarr@jmangroup.com/cicd"
 
     - name: Configure Git and Push to GitHub
       run: |
