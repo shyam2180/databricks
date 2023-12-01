@@ -26,11 +26,15 @@ jobs:
 
     - name: Configure Databricks CLI
       run: |
-        $databricksHost = "https://${{ secrets.DATABRICKS_HOST }}"
-        Write-Output "***`n***" | databricks configure --token --host $databricksHost
+        # Copy or reference the existing .databrickscfg file from your local environment
+        Copy-Item -Path "C:\Users\ShyamKumarR\.databrickscfg" -Destination "$env:USERPROFILE\.databrickscfg" -Force
+    
+        # Run the databricks configure command using the copied .databrickscfg file
+        databricks configure --token
       env:
         DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
         DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
 
 
     - name: Debug Token and Host
