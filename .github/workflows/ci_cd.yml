@@ -44,15 +44,20 @@ jobs:
 
     - name: List Contents of Directory
       run: dir "C:\Users\ShyamKumarR\test_cicd_output"
-        
-    - name: Check File Existence
-      run: test -f "C:\Users\ShyamKumarR\test_cicd_output\ci_cd.py" && echo "File exists" || echo "File does not exist"
 
-    - name: Display Local File Content
-      run: Get-Content "C:\Users\ShyamKumarR\test_cicd_output\ci_cd.py"
+    - name: List Contents of Directory
+      run: Get-ChildItem "C:\Users\ShyamKumarR\test_cicd_output"
       shell: pwsh
-
-
+      
+    - name: Copy File to Known Location
+      run: Copy-Item "C:\Users\ShyamKumarR\test_cicd_output\ci_cd.py" ".\"
+      shell: pwsh
+      
+    - name: Debug Information
+      run: |
+        Get-ChildItem "C:\Users\ShyamKumarR\test_cicd_output" -ErrorAction SilentlyContinue
+        Get-Location
+      shell: pwsh
 
     - name: Update Databricks Notebook
       run: |
