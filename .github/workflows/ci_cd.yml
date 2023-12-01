@@ -26,9 +26,9 @@ jobs:
         run: |
           pip install databricks-cli
 
-      - name: Configure Databricks CLI
+      - name: Configure Databricks Token
         run: |
-          echo -e "${{ secrets.DATABRICKS_HOST }}\n${{ secrets.DATABRICKS_TOKEN }}" | databricks configure --token
+          Write-Output "***`n***" | databricks configure --token
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
