@@ -41,7 +41,10 @@ jobs:
         echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_HOST }}"
     - name: Verify Databricks CLI Configuration
       run: cat $HOME/.databrickscfg
-      
+
+    - name: List Contents of Directory
+      run: dir "C:\Users\ShyamKumarR\test_cicd_output"
+        
     - name: Check File Existence
       run: test -f "C:\Users\ShyamKumarR\test_cicd_output\ci_cd.py" && echo "File exists" || echo "File does not exist"
 
