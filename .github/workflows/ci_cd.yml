@@ -63,7 +63,7 @@ jobs:
           LOCAL_NOTEBOOK_PATH="${LOCAL_NOTEBOOK_PATH//\//\\}"
 
           # Create necessary directories in the GitHub Actions workspace
-          WORKSPACE_PATH="$GITHUB_WORKSPACE/MyWorkspace"
+          WORKSPACE_PATH="$GITHUB_WORKSPACE"
           mkdir -p "$WORKSPACE_PATH"
           
           # Display debug information
@@ -71,7 +71,7 @@ jobs:
           echo "Content of workspace: $(ls -al $WORKSPACE_PATH)"
 
           # Import notebook to Databricks workspace
-          databricks workspace import -l PYTHON "/Workspace" "$LOCAL_NOTEBOOK_PATH"
+          databricks workspace import -l PYTHON "$GITHUB_WORKSPACE" "$LOCAL_NOTEBOOK_PATH"
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
