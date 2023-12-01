@@ -26,14 +26,23 @@ jobs:
 
     - name: Configure Databricks CLI
       run: |
-        # Copy or reference the existing .databrickscfg file from your local environment
-        Copy-Item -Path "C:\Users\ShyamKumarR\.databrickscfg" -Destination "$env:USERPROFILE\.databrickscfg" -Force
+        $localDatabricksCfg = "C:\Users\ShyamKumarR\.databrickscfg"
+        $githubActionsDatabricksCfg = "$env:USERPROFILE\.databrickscfg"
     
-        # Run the databricks configure command using the copied .databrickscfg file
-        databricks configure --token
+        # Check if the local .databrickscfg file exists before copying
+        if (Test-Path $localDatabricksCfg) {
+            # Copy the existing .databrickscfg file from your local environment
+            Copy-Item -Path $localDatabricksCfg -Destination $githubActionsDatabricksCfg -Force
+    
+            # Run the databricks configure command using the copied .databrickscfg file
+            databricks configure --token
+        } else {
+            Write-Host "Error: Local .databrickscfg file not found."
+        }
       env:
         DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
         DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
 
 
 
