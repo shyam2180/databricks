@@ -63,7 +63,7 @@ jobs:
           LOCAL_NOTEBOOK_PATH="${LOCAL_NOTEBOOK_PATH//\//\\}"
 
           # Create necessary directories in the GitHub Actions workspace
-          WORKSPACE_PATH="$GITHUB_WORKSPACE/MyWorkspace/$DATABRICKS_ORG_NAME/$DATABRICKS_REPO_ID/Folder/$DATABRICKS_FOLDER_ID"
+          WORKSPACE_PATH="$GITHUB_WORKSPACE/MyWorkspace"
           mkdir -p "$WORKSPACE_PATH"
           
           # Display debug information
