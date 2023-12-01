@@ -33,7 +33,11 @@ jobs:
 
       - name: Verify Databricks CLI Configuration
         run: cat $HOME/.databrickscfg
-
+      
+      - name: Debug Working Directory
+        run: |
+          pwd
+      
       - name: Upload Notebook to Databricks
         run: |     
           # Set variables for Databricks workspace and local notebook path
