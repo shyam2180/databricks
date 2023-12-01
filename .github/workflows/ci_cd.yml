@@ -37,13 +37,14 @@ jobs:
       - name: Debug Working Directory
         run: |
           pwd
-      - name: Debug Directory Contents
-        run: ls -al "/Repos/shyamkumarr@jmangroup.com/databricks"
+
+      - name: Debug Root Directory Contents
+        run: ls -al "/"
         
       - name: Upload Notebook to Databricks
         run: |     
           # Set variables for Databricks workspace and local notebook path
-          DATABRICKS_PATH= "/home/runner/work/databricks/databricks/"
+          DATABRICKS_PATH= "/databricks"
           LOCAL_NOTEBOOK_PATH="C:\\Users\\ShyamKumarR\\OneDrive - JMAN Group Ltd\\Desktop\\test_cicd_output\\ci_cd.py"
           
           # Replace forward slashes with escaped forward slashes for Windows paths
