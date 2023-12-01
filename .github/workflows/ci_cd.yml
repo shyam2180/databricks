@@ -37,7 +37,9 @@ jobs:
       - name: Debug Working Directory
         run: |
           pwd
-      
+      - name: Debug Directory Contents
+        run: ls -al "/Repos/shyamkumarr@jmangroup.com/databricks"
+        
       - name: Upload Notebook to Databricks
         run: |     
           # Set variables for Databricks workspace and local notebook path
