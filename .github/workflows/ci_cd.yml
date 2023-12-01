@@ -28,10 +28,9 @@ jobs:
 
       - name: Configure Databricks Token
         run: |
-          Write-Output "***`n***" | databricks configure --token
-        env:
-          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
-          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+          $env:DATABRICKS_HOST = "${{ secrets.DATABRICKS_HOST }}"
+          $env:DATABRICKS_TOKEN = "${{ secrets.DATABRICKS_TOKEN }}"
+          Write-Output "***`n***" | databricks configure --token --host $env:DATABRICKS_HOST
 
       - name: Debug Token and Host
         run: |
