@@ -30,7 +30,11 @@ jobs:
         run: |
           $env:DATABRICKS_HOST = "${{ secrets.DATABRICKS_HOST }}"
           $env:DATABRICKS_TOKEN = "${{ secrets.DATABRICKS_TOKEN }}"
-          Write-Output "***`n***" | databricks configure --token --host $env:DATABRICKS_HOST
+          
+          # You might need to adjust the specific syntax based on your use case
+          Write-Host "Setting Databricks Host and Token"
+          databricks configure --token --host $env:DATABRICKS_HOST --token $env:DATABRICKS_TOKEN
+
 
       - name: Debug Token and Host
         run: |
