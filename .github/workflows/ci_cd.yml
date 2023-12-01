@@ -26,18 +26,12 @@ jobs:
         run: |
           pip install databricks-cli
 
-      - name: Configure Databricks Token
+      - name: Configure Databricks CLI
         run: |
-          $env:DATABRICKS_HOST = "${{ secrets.DATABRICKS_HOST }}"
-          $env:DATABRICKS_TOKEN = "${{ secrets.DATABRICKS_TOKEN }}"
-      
-          # Write Databricks configuration to a temporary file
-          Set-Content -Path "databricks-config.json" -Value @"{
-          "host": "$env:DATABRICKS_HOST",
-          "token": "$env:DATABRICKS_TOKEN"}"@
-          
-          # Configure Databricks using the configuration file
-          databricks configure --token --config databricks-config.json
+            echo -e "${{ secrets.DATABRICKS_HOST }}\n${{ secrets.DATABRICKS_TOKEN }}" | databricks configure --token
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
 
 
 
