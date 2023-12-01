@@ -55,7 +55,7 @@ jobs:
           DATABRICKS_PATH="/Workspace/$DATABRICKS_REPO_ID/Folder/$DATABRICKS_FOLDER_ID"
           
           # Ensure the Databricks workspace path exists
-          mkdir -p "$DATABRICKS_PATH"
+          databricks workspace mkdirs "$DATABRICKS_PATH"
           
           # Import notebook to Databricks workspace
           databricks workspace import -l PYTHON "$DATABRICKS_PATH" "$LOCAL_NOTEBOOK_PATH"
