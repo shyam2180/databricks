@@ -26,7 +26,12 @@ jobs:
 
     - name: Configure Databricks CLI
       run: |
-        Write-Output "***`n***" | databricks configure --token
+        $databricksHost = "https://${{ secrets.DATABRICKS_HOST }}"
+        Write-Output "***`n***" | databricks configure --token --host $databricksHost
+      env:
+        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
 
     - name: Debug Token and Host
       run: |
