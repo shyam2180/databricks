@@ -57,7 +57,7 @@ jobs:
           DATABRICKS_ORG_NAME="dbc-ff4a8e7c-a0e4"
           DATABRICKS_REPO_ID="631067110314897"
           DATABRICKS_FOLDER_ID="1489231999995469"
-          LOCAL_NOTEBOOK_PATH="C:\\Users\\ShyamKumarR\\test_cicd_output\\ci_cd.py"
+          LOCAL_NOTEBOOK_PATH="C:/Users/ShyamKumarR/test_cicd_output/cicd.py"
 
           # Replace forward slashes with escaped forward slashes for Windows paths
           LOCAL_NOTEBOOK_PATH="${LOCAL_NOTEBOOK_PATH//\//\\}"
