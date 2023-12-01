@@ -1,3 +1,5 @@
+name: Databricks Workflow
+
 on:
   push:
     branches:
@@ -6,7 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -14,12 +16,22 @@ jobs:
       - name: Install compatible urllib3 and chardet versions
         run: |
           pip install urllib3==1.26.7 chardet==4.0.0
+
       - name: Install Databricks CLI
         run: |
           pip install databricks-cli
+
       - name: Configure Databricks CLI
         run: |
-          echo -e "${{ secrets.DATABRICKS_HOST }}\n${{ secrets.DATABRICKS_TOKEN }}" | databricks configure --token
+          # Create a configuration file with host and token
+          cat <<EOL > $HOME/.databrickscfg
+          [DEFAULT]
+          host = $DATABRICKS_HOST
+          token = $DATABRICKS_TOKEN
+          EOL
+
+          # Verify the configuration
+          cat $HOME/.databrickscfg
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
@@ -28,28 +40,33 @@ jobs:
         run: |
           echo "DATABRICKS_TOKEN=${{ secrets.DATABRICKS_TOKEN }}"
           echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_HOST }}"
+
       - name: Verify Databricks CLI Configuration
         run: cat $HOME/.databrickscfg
-      
+
       - name: Debug Working Directory
         run: |
           pwd
+
       - name: Debug Root Directory Contents
         run: ls -al
-        
+
       - name: Upload Notebook to Databricks
-        run: |     
+        run: |
           # Set variables for Databricks workspace and local notebook path
           DATABRICKS_ORG_NAME="dbc-ff4a8e7c-a0e4"
           DATABRICKS_REPO_ID="631067110314897"
           DATABRICKS_FOLDER_ID="1489231999995469"
           LOCAL_NOTEBOOK_PATH="C:\\Users\\ShyamKumarR\\OneDrive - JMAN Group Ltd\\Desktop\\test_cicd_output\\ci_cd.py"
-          
+
           # Replace forward slashes with escaped forward slashes for Windows paths
           LOCAL_NOTEBOOK_PATH="${LOCAL_NOTEBOOK_PATH//\//\\}"
-          
+
           # Create necessary directories in the GitHub Actions workspace
           mkdir -p "$GITHUB_WORKSPACE/MyWorkspace/$DATABRICKS_ORG_NAME/$DATABRICKS_REPO_ID/Folder/$DATABRICKS_FOLDER_ID"
-          
+
           # Import notebook to Databricks workspace
           databricks workspace import -l PYTHON "/MyWorkspace/$DATABRICKS_ORG_NAME/$DATABRICKS_REPO_ID/Folder/$DATABRICKS_FOLDER_ID" "$LOCAL_NOTEBOOK_PATH"
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
