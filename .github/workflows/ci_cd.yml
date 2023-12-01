@@ -28,10 +28,11 @@ jobs:
 
       - name: Configure Databricks CLI
         run: |
-            echo -e "${{ secrets.DATABRICKS_HOST }}\n${{ secrets.DATABRICKS_TOKEN }}" | databricks configure --token
+          Write-Output "${{ secrets.DATABRICKS_HOST }}`n${{ secrets.DATABRICKS_TOKEN }}" | databricks configure --token
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
 
 
 
