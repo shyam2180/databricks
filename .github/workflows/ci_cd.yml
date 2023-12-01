@@ -21,6 +21,27 @@ jobs:
       run: |
         pip install urllib3==1.26.7 chardet==4.0.0
 
+    - name: Configure Databricks CLI
+      run: |
+        # Create a configuration file with host and token
+        cat <<EOL > $HOME/.databrickscfg
+        [DEFAULT]
+        host = $DATABRICKS_HOST
+        token = $DATABRICKS_TOKEN
+        EOL
+        # Verify the configuration
+        cat $HOME/.databrickscfg
+      env:
+        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
+    - name: Debug Token and Host
+      run: |
+        echo "DATABRICKS_TOKEN=${{ secrets.DATABRICKS_TOKEN }}"
+        echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_HOST }}"
+    - name: Verify Databricks CLI Configuration
+      run: cat $HOME/.databrickscfg
+    
     - name: Update Databricks Notebook
       run: |
         # Assuming 'workspace:/path/to/notebook' is the notebook path in Databricks
