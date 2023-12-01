@@ -50,10 +50,10 @@ jobs:
           
           # Replace forward slashes with escaped forward slashes for Windows paths
           LOCAL_NOTEBOOK_PATH="${LOCAL_NOTEBOOK_PATH//\//\\}"
-          
+
           # Create the Databricks workspace path
-          DATABRICKS_PATH="/Workspace/$DATABRICKS_REPO_ID/Folder/$DATABRICKS_FOLDER_ID"
-          
+          DATABRICKS_PATH="/MyWorkspace/$DATABRICKS_REPO_ID/Folder/$DATABRICKS_FOLDER_ID"
+
           # Ensure the Databricks workspace path exists
           databricks workspace mkdirs "$DATABRICKS_PATH"
           
