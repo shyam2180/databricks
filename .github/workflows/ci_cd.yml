@@ -17,7 +17,7 @@ jobs:
           ls -al
 
       - name: Set execute permissions for Python script
-        run: chmod +x C:\Users\ShyamKumarR\test_cicd_output\cicd.py
+        run: chmod +x "C:\Users\ShyamKumarR\test_cicd_output\cicd.py"
 
 
       - name: Install compatible urllib3 and chardet versions
