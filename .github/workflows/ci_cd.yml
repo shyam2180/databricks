@@ -42,8 +42,14 @@ jobs:
     - name: Verify Databricks CLI Configuration
       run: cat $HOME/.databrickscfg
       
+    - name: Check File Existence
+      run: test -f "C:/Users/ShyamKumarR/test_cicd_output/ci_cd.py" && echo "File exists" || echo "File does not exist"
+
     - name: Display Local File Content
-      run: cat C:/Users/ShyamKumarR/test_cicd_output/ci_cd.py
+      run: Get-Content "C:/Users/ShyamKumarR/test_cicd_output/ci_cd.py"
+      shell: pwsh
+
+
 
     - name: Update Databricks Notebook
       run: |
