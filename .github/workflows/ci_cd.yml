@@ -13,8 +13,9 @@ jobs:
         
       - name: Debug Information
         run: |
-          echo "Current working directory: $(pwd)"
-          ls -al
+          echo "Current working directory: $(Get-Location)"
+          Get-ChildItem -Force
+
 
 
       - name: Install compatible urllib3 and chardet versions
