@@ -36,8 +36,7 @@ jobs:
           {
               "host": "$env:DATABRICKS_HOST",
               "token": "$env:DATABRICKS_TOKEN"
-          }
-      "@
+          }"@
       
           # Configure Databricks using the configuration file
           databricks configure --token --config databricks-config.json
