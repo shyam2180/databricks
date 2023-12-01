@@ -50,7 +50,7 @@ jobs:
           LOCAL_NOTEBOOK_PATH="C:\\Users\\ShyamKumarR\\OneDrive - JMAN Group Ltd\\Desktop\\test_cicd_output\\ci_cd.py"
           
           # Replace 'local-file.txt' with the actual local file you want to upload
-          LOCAL_FILE_PATH= C:\Users\ShyamKumarR\test_cicd_output\cicd.py
+          LOCAL_FILE_PATH= "C:\Users\ShyamKumarR\test_cicd_output\cicd.py"
 
           # Construct the API endpoint
           API_ENDPOINT=${DATABRICKS_HOST}/api/2.0/workspace/import
