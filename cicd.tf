@@ -1,7 +1,7 @@
 # Databricks provider configuration
 provider "databricks" {
   host  = "https://dbc-ff4a8e7c-a0e4.cloud.databricks.com/"
-  token = dapidbbacbbe2594b133eb06cf028d114f47
+  token = "dapidbbacbbe2594b133eb06cf028d114f47"
 }
  
 # Databricks workspace resource definition
@@ -20,18 +20,9 @@ resource "databricks_cluster" "example" {
   autotermination_minutes = 10
 }
  
-# Databricks Library (Additional Resource)
-resource "databricks_library" "example_library" {
-  # Configure library settings
-cluster_id = databricks_cluster.example.id
-  library_name   = "my-library"
-  jar            = "dbfs:/mnt/my-bucket/my-library.jar"
-  # Add more library configurations as needed
-}
- 
 # Databricks Notebook resource definition
 resource "databricks_notebook" "example_notebook" {
   # Configure notebook settings
   name    = "my-notebook"
-  content = file("C:\Users\ShyamKumarR\test_cicd_output\ci_cd.py") # Replace with your local notebook path
+  content = file("C:\\Users\\ShyamKumarR\\test_cicd_output\\ci_cd.py") # Replace with your local notebook path
 }
