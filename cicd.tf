@@ -1,7 +1,16 @@
 # Databricks provider configuration
+terraform {
+  required_providers {
+    databricks = {
+      source  = "hashicorp/databricks"
+      version = "0.3.0"  # Adjust the version accordingly
+    }
+  }
+}
+
 provider "databricks" {
-  host  = "https://dbc-ff4a8e7c-a0e4.cloud.databricks.com/"
-  token = "dapidbbacbbe2594b133eb06cf028d114f47"
+  host    = "https://dbc-ff4a8e7c-a0e4.cloud.databricks.com/"
+  token   = "dapidbbacbbe2594b133eb06cf028d114f47"
   version = "0.3.0"
 }
  
