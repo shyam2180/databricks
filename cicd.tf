@@ -3,7 +3,7 @@ terraform {
   required_providers {
     databricks = {
       source  = "hashicorp/databricks"
-      version ">= 0.3.0"
+      version = ">= 0.3.0"
     }
   }
 }
