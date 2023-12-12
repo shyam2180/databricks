@@ -10,7 +10,6 @@ terraform {
 provider "databricks" {
   host    = "https://dbc-ff4a8e7c-a0e4.cloud.databricks.com/"
   token   = "dapidbbacbbe2594b133eb06cf028d114f47"
-  version = "0.3.0"
 }
  
 # Databricks workspace resource definition
