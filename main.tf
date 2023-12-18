@@ -8,10 +8,8 @@ terraform {
   }
 }
 provider "databricks" {
-  # Configure the Databricks provider with the required credentials
-  # More information: https://registry.terraform.io/providers/databrickslabs/databricks/latest/docs/index.html#provider-configuration
-  token                    = "dapidbbacbbe2594b133eb06cf028d114f47"
-  workspace_url            = "https://dbc-ff4a8e7c-a0e4.cloud.databricks.com"
+  host  = "https://dbc-ff4a8e7c-a0e4.cloud.databricks.com/"
+  token = "dapidbbacbbe2594b133eb06cf028d114f47"
 }
 
 resource "databricks_workspace" "main" {
