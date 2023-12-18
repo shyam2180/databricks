@@ -13,13 +13,13 @@ provider "databricks" {
 }
  
 # Databricks workspace resource definition
-resource "databricks_workspace" "example" {
+resource "databricks_workspace" "test" {
   # Configure workspace settings
   name = "/Repos/shyamkumarr@jmangroup.com/databricks/cicd"
 }
  
 # Databricks cluster resource definition
-resource "databricks_cluster" "example" {
+resource "databricks_cluster" "test" {
   # Configure cluster settings
   cluster_name            = "DE-cluster"
   spark_version           = "13.3.x-scala2.12"
@@ -29,9 +29,9 @@ resource "databricks_cluster" "example" {
 }
  
 # Databricks Notebook resource definition
-resource "databricks_notebook" "example_notebook" {
+resource "databricks_notebook" "test_notebook" {
   # Configure notebook settings
   name    = "my_notebook"
-  path    = databricks_workspace.example.path
+  path    = databricks_workspace.test.path
   content = file("C:\\Users\\AravindaNarayana\\Desktop\\test_cicd_output\\ci_cd.py.txt")
 }
