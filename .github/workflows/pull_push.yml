@@ -1,9 +1,10 @@
-name: Dev to Main Workflow
+name: Pull Push Workflow
 
 on:
-  push:
-    branches:
-      - dev
+  workflow_run:
+    workflows: ["Main Workflow"]
+    types:
+      - completed
 
 jobs:
   merge_to_main:
@@ -12,6 +13,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Fetch all branches
 
       - name: Merge Dev to Main
         run: |
