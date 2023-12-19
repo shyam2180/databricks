@@ -1,10 +1,9 @@
-name: Pull and Push Workflow
+name: Main Workflow
 
 on:
-  workflow_run:
-    workflows: ["Main Workflow"]
-    types:
-      - completed
+  push:
+    branches:
+      - main
 
 jobs:
   pull-push-job:
