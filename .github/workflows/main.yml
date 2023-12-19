@@ -1,0 +1,23 @@
+name: Main Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  pull-push-job:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Run Pull and Push workflow
+      run: |
+        cd ${{ github.workspace }}
+        git checkout dev  # Switch to dev branch
+        git pull origin dev  # Pull changes from dev
+        git checkout main  # Switch back to main branch
+        git merge dev  # Merge changes from dev into main
+        git push origin main  # Push changes to main
