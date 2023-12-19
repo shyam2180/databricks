@@ -1,10 +1,9 @@
 name: Pull and Push Workflow
 
 on:
-  workflow_run:
-    workflows: ["Main Workflow"]
-    types:
-      - completed
+  push:
+    branches:
+      - dev
 
 jobs:
   pull-push-job:
@@ -14,11 +13,19 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Run Pull and Push workflow
+    - name: Configure Git
       run: |
-        cd ${{ github.workspace }}
-        git checkout dev  # Switch to dev branch
-        git pull origin dev  # Pull changes from dev
-        git checkout main  # Switch back to main branch
-        git merge dev  # Merge changes from dev into main
-        git push origin main  # Push changes to main
+        git config --global user.email "actions@github.com"
+        git config --global user.name "GitHub Actions"
+
+    - name: Pull changes from dev
+      run: |
+        git pull origin dev
+
+    # Add your build/test steps here
+
+    - name: Push changes to main
+      run: |
+        git checkout main
+        git merge dev
+        git push origin main
