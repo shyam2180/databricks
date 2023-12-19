@@ -15,11 +15,7 @@ provider "databricks" {
 resource "databricks_workspace" "main" {
   # main workspace configuration
   name = "main"
-}
-
-resource "databricks_workspace" "prod" {
-  # Prod workspace configuration
-  name = "prod"
+  version = ">=0.4.0"
 }
 
 # Upload Python file to main workspace
