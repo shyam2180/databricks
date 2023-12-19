@@ -12,7 +12,7 @@ provider "databricks" {
   token = "dapidbbacbbe2594b133eb06cf028d114f47"
 }
 
-resource "databricks_workspace" "main" {
+resource "databricks" "main" {
   # main workspace configuration
   name = "main"
   version = ">=0.4.0"
