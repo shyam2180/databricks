@@ -11,13 +11,6 @@ provider "databricks" {
   token = "dapidbbacbbe2594b133eb06cf028d114f47"
 }
 
-provider "azurerm" {
-  features {
-    managed_disk {
-      expand_without_downtime = true
-    }
-  }
-}
 # # Databricks cluster resource definition To create a cluster
 # resource "databricks_cluster" "main" {
 #   # Configure cluster settings
@@ -28,15 +21,20 @@ provider "azurerm" {
 #   autotermination_minutes = 10
 # }
 
-resource "azurerm_resource_group" "example" {
-  name     = "example-resources"
-  location = "West Europe"
+data "databricks_current_user" "current_user" {}
+
+data "databricks_spark_version" "latest" {}
+
+data "databricks_node_type" "smallest" {
+  local_disk = true
 }
 
-resource "azurerm_databricks_workspace" "example" {
-  name                = "databricks-test"
-  resource_group_name = azurerm_resource_group.example.name
-  location            = azurerm_resource_group.example.location
-  sku                 = "standard"
+resource "databricks_notebook" "this" {
+  path           = "/Users/shyamkumarr@jmangroup.com/cicd1"
+  language       = "PYTHON"
+  content_base64 = base64encode(<<-EOT
+    # created from ${abspath(path.module)}
+    display(spark.range(10))
+  EOT
+  )
 }
- 
