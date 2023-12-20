@@ -16,7 +16,9 @@ jobs:
         ref: main
 
     - name: Azure Login
-      run: az login
+      run: |
+        az account clear
+        az login
     
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
