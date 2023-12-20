@@ -53,8 +53,8 @@ jobs:
         # databricks fs cp "C:/Users/ShyamKumarR/test_cicd_output/ci_cd.py" dbfs:/FileStore/Files/ci_cd.py
         
         # Export and import the notebook in Databricks workspace
-        databricks workspace export -o "dbfs:/FileStore/Files/ci_cd.py" "workspace:/Users/shyamkumarr@jmangroup.com/cicd"
-        databricks workspace import -o "dbfs:/FileStore/Files/ci_cd.py" "workspace:/Users/shyamkumarr@jmangroup.com/cicd"
+        databricks workspace export -o "/dbfs/FileStore/Files/ci_cd.py" "workspace:/Users/shyamkumarr@jmangroup.com/cicd"
+        databricks workspace import -o "/dbfs/FileStore/Files/ci_cd.py" "workspace:/Users/shyamkumarr@jmangroup.com/cicd"
         
     - name: Configure Git and Push to GitHub
       run: |
