@@ -50,8 +50,8 @@ jobs:
         # Check if the file exists in DBFS
         if databricks fs ls "dbfs:/tmp/ci_cd.py"; then
           # Export and import the notebook in Databricks workspace
-          databricks workspace export -o "/tmp/ci_cd.py" "workspace:/Users/shyamkumarr@jmangroup.com/cicd"
-          databricks workspace import -o "/tmp/ci_cd.py" "workspace:/Users/shyamkumarr@jmangroup.com/cicd"
+          databricks workspace export -o "dbfs:/tmp/ci_cd.py" "workspace:/Users/shyamkumarr@jmangroup.com/cicd"
+          databricks workspace import -o "dbfs:/tmp/ci_cd.py" "workspace:/Users/shyamkumarr@jmangroup.com/cicd"
         else
           echo "Error: The file does not exist in DBFS."
           exit 1
