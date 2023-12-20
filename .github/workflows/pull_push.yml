@@ -47,11 +47,11 @@ jobs:
     
     - name: Update Databricks Notebook
       run: |
-        # Check if the file exists in DBFS (using absolute path)
-        if databricks fs ls "/dbfs/tmp/ci_cd.py"; then
-            # Export and import the notebook in Databricks workspace (using absolute paths)
-            databricks workspace export -o "/dbfs/tmp/ci_cd.py" "/Users/shyamkumarr@jmangroup.com/cicd"
-            databricks workspace import -o "/dbfs/tmp/ci_cd.py" "/Users/shyamkumarr@jmangroup.com/cicd"
+        # Check if the file exists in DBFS (using Spark API format)
+        if databricks fs ls "dbfs:/tmp/ci_cd.py"; then
+            # Export and import the notebook in Databricks workspace (using Spark API format)
+            databricks workspace export -o "dbfs:/tmp/ci_cd.py" "/Users/shyamkumarr@jmangroup.com/cicd"
+            databricks workspace import -o "dbfs:/tmp/ci_cd.py" "/Users/shyamkumarr@jmangroup.com/cicd"
         else
             echo "Error: The file does not exist in DBFS."
             exit 1
