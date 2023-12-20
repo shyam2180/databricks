@@ -47,11 +47,16 @@ jobs:
     
     - name: Update Databricks Notebook
       run: |
-        # Export and import the notebook in Databricks workspace
-        databricks workspace export -o "/tmp/ci_cd.py" "workspace:/Users/shyamkumarr@jmangroup.com/cicd"
-        databricks workspace import -o "/tmp/ci_cd.py" "workspace:/Users/shyamkumarr@jmangroup.com/cicd"
+        # Check if the file exists in DBFS
+        if databricks fs ls "dbfs:/tmp/ci_cd.py"; then
+          # Export and import the notebook in Databricks workspace
+          databricks workspace export -o "/tmp/ci_cd.py" "workspace:/Users/shyamkumarr@jmangroup.com/cicd"
+          databricks workspace import -o "/tmp/ci_cd.py" "workspace:/Users/shyamkumarr@jmangroup.com/cicd"
+        else
+          echo "Error: The file does not exist in DBFS."
+          exit 1
+        fi
 
-        
     - name: Configure Git and Push to GitHub
       run: |
         git config --global user.email "shyamkumarr@jmangroup.com"
