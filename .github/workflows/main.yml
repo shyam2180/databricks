@@ -17,7 +17,6 @@ jobs:
 
     - name: Azure Login
       run: |
-        az account clear
         az login --use-device-code
       env:
         AZURE_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
