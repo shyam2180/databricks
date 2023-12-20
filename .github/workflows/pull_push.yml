@@ -48,8 +48,8 @@ jobs:
     - name: Update Databricks Notebook
       run: |
         # Export and import the notebook in Databricks workspace
-        databricks workspace export -o "/dbfs/tmp/ci_cd.py" "workspace:/Users/shyamkumarr@jmangroup.com/cicd"
-        databricks workspace import -o "/dbfs/tmp/ci_cd.py" "workspace:/Users/shyamkumarr@jmangroup.com/cicd"
+        databricks workspace export -o "/tmp/ci_cd.py" "workspace:/Users/shyamkumarr@jmangroup.com/cicd"
+        databricks workspace import -o "/tmp/ci_cd.py" "workspace:/Users/shyamkumarr@jmangroup.com/cicd"
 
         
     - name: Configure Git and Push to GitHub
