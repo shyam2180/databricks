@@ -18,7 +18,9 @@ jobs:
     - name: Azure Login
       run: |
         az account clear
-        az login --allow-no-subscriptions
+        az login --use-device-code
+      env:
+        AZURE_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
