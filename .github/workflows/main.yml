@@ -20,7 +20,7 @@ jobs:
         az login --identity
         az account set --subscription 7a36f602-0997-4b47-8be2-c759d6067bfa
       env:
-        AZURE_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        AZURE_GITHUB_TOKEN: ${{ secrets.AZURE_GITHUB_TOKEN }}
     
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
