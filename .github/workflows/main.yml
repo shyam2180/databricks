@@ -17,7 +17,7 @@ jobs:
 
     - name: Azure Login
       run: |
-        az login --identity
+        az login --identity --debug
       env:
         AZURE_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
