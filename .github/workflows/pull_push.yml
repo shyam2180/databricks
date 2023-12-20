@@ -14,53 +14,14 @@ jobs:
       uses: actions/checkout@v2
       with:
         ref: main
-
-    - name: Install Databricks CLI
-      run: |
-        pip install databricks-cli
-        
-    - name: Install compatible urllib3 and chardet versions
-      run: |
-        pip install urllib3==1.26.7 chardet==4.0.0
-
-    - name: Configure Databricks CLI
-      run: |
-        # Create a configuration file with host and token
-        cat <<EOL > $HOME/.databrickscfg
-        [DEFAULT]
-        host = $DATABRICKS_HOST
-        token = $DATABRICKS_TOKEN
-        EOL
-        # Verify the configuration
-        cat $HOME/.databrickscfg
-      env:
-        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
-        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-
-    - name: Debug Token and Host
-      run: |
-        echo "DATABRICKS_TOKEN=${{ secrets.DATABRICKS_TOKEN }}"
-        echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_HOST }}"
-        
-    - name: Verify Databricks CLI Configuration
-      run: cat $HOME/.databrickscfg
     
-    - name: Update Databricks Notebook
-      run: |
-        # Check if the file exists in DBFS (using absolute path for all commands)
-        if databricks fs ls "/dbfs/tmp/ci_cd.py"; then
-            # Export and import the notebook in Databricks workspace (also using absolute path)
-            databricks workspace export -o "/dbfs/tmp/ci_cd.py" "/Users/shyamkumarr@jmangroup.com/cicd"
-            databricks workspace import -o "/dbfs/tmp/ci_cd.py" "/Users/shyamkumarr@jmangroup.com/cicd"
-        else
-            echo "Error: The file does not exist in DBFS."
-            exit 1
-        fi
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: ">=0.14.0"
+    
+    - name: Terraform Init
+      run: terraform init
 
-    - name: Configure Git and Push to GitHub
-      run: |
-        git config --global user.email "shyamkumarr@jmangroup.com"
-        git config --global user.name "shyam2180"
-        git add .
-        git commit -m "Update Databricks notebook"
-        git push
+    - name: Terraform Apply
+      run: terraform apply -auto-approve
