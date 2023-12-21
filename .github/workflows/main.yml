@@ -38,22 +38,21 @@ jobs:
     - name: Terraform Apply
       run: terraform apply -auto-approve
 
-    - name: Move main to dev if Terraform apply succeeds
+    - name: Merge dev into main if Terraform apply succeeds
       if: success()
       run: |
-        # Rename the branch locally
-        git branch -m main dev
-    
-        # Fetch remote changes
-        git fetch --all
-    
-        # Push the local dev branch to GitHub (creating a new branch)
-        git push origin dev
-    
-        # Use the GitHub token for authentication
-        git push origin :main # Delete the old main branch
-    
-        # Set up tracking for the new dev branch
-        git branch -u origin/dev dev
+        # Switch to the main branch
+        git checkout main
+        
+        # Pull the latest changes from the remote main branch
+        git pull origin main
+        
+        # Merge changes from the dev branch into the main branch
+        git merge dev
+        
+        # Push the changes to the main branch
+        git push origin main
+        
       env:
         GH_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
