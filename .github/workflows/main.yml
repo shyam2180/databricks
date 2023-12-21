@@ -51,4 +51,4 @@ jobs:
         git fetch --all
         git branch -u origin/dev dev
       env:
-        GH_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
