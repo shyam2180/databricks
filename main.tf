@@ -30,7 +30,7 @@ data "databricks_node_type" "smallest" {
 }
 
 resource "databricks_notebook" "this" {
-  path           = "/Users/shyamkumarr@jmangroup.com/cicd/cicd1"
+  path           = "/Repos/shyamkumarr@jmangroup.com/databricks/cicd/cicd1"
   language       = "PYTHON"
   content_base64 = base64encode(<<-EOT
     # created from ${abspath(path.module)}
