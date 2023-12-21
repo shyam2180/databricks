@@ -29,12 +29,17 @@ data "databricks_node_type" "smallest" {
   local_disk = true
 }
 
+
+data "databricks_dbfs_file" "notebook_file" {
+  path      = "dbfs:/tmp/ci_cd.py"
+  limit_file_size = true
+}
+locals {
+  notebook_content = data.databricks_dbfs_file.notebook_file.content
+}
+
 resource "databricks_notebook" "this" {
-  path           = "/Repos/shyamkumarr@jmangroup.com/databricks/cicd/cicd1"
+  path           = "/Repos/shyamkumarr@jmangroup.com/databricks/cicd/cicd"
   language       = "PYTHON"
-  content_base64 = base64encode(<<-EOT
-    # created from ${abspath(path.module)}
-    display(spark.range(10))
-  EOT
-  )
+  content_base64 = data.databricks_dbfs_file.notebook_file.content
 }
