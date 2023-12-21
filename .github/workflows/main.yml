@@ -42,16 +42,16 @@ jobs:
       run: |
         if [ $? -eq 0 ]; then
           echo "Terraform apply succeeded. Proceeding to the next steps."
-          - name: Move changes from dev to main if Terraform apply succeeds
-            run: |
-              # Switch to the main branch
-              git checkout main
-              
-              # Merge changes from dev into main
-              git merge dev --no-ff
-              
-              # Push the changes to GitHub
-              git push origin main
+    - name: Move changes from dev to main if Terraform apply succeeds
+      run: |
+        # Switch to the main branch
+        git checkout main
+        
+        # Merge changes from dev into main
+        git merge dev --no-ff
+        
+        # Push the changes to GitHub
+        git push origin main
           env:
             GH_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         else
