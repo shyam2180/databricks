@@ -18,7 +18,7 @@ jobs:
     # - name: Azure Login
     #   run: |
     #     az login --identity
-    #     az account set --subscription 7a36f602-0997-4b47-8be2-c759d6067bfa
+    #     az account set --subscription
     #   env:
     #     AZURE_GITHUB_TOKEN: ${{ secrets.AZURE_GITHUB_TOKEN }}
     
@@ -39,18 +39,12 @@ jobs:
     - name: Terraform Apply
       run: terraform apply -auto-approve
 
-    - name: Set up Git credentials  # Securely store and use a personal access token
+    - name: Merge changes to Main
+      run: git merge --no-ff origin/dev
+
+    - name: Push changes to Main
       run: |
-        git config --global user.email "shyamkumarr@jmangroup.com"
-        git config --global user.name "shyam2180"
-        echo "https://${GH_TOKEN}@github.com" >> ~/.git-credentials
+        git config --local user.email "actions@github.com"
+        git config --local user.name "GitHub Actions"
+        git push origin main
 
-    - name: Fetch latest changes
-      run: git fetch --all
-
-    - name: Pull remote changes from main branch and rebase
-      run: git pull --rebase origin main
-
-    - name: Push changes to main branch
-      run: git push origin dev:main
-  
