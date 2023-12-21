@@ -41,12 +41,13 @@ jobs:
 
     - name: Check Terraform Apply Status
       run: |
-        if [ ${{ steps.terraform_apply.outcome }} == "success" ]; then
+        if [ "${{ steps.terraform_apply.outcome }}" == "success" ]; then
           echo "Terraform apply succeeded. Proceeding to the next steps."
         else
           echo "Terraform apply failed. Exiting the workflow."
           exit 1
         fi
+
 
     - name: Check for changes in Dev
       id: check_changes
