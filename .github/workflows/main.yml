@@ -3,17 +3,18 @@ name: Update Databricks Notebook and Push to GitHub
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   update_and_push:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout main branch
+    - name: Checkout dev branch
       uses: actions/checkout@v2
       with:
-        ref: main
+        ref: dev
+
     # - name: Azure Login
     #   run: |
     #     az login --identity
@@ -55,4 +56,3 @@ jobs:
         
       env:
         GH_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-
