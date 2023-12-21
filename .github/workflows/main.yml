@@ -48,8 +48,8 @@ jobs:
     - name: Fetch latest changes
       run: git fetch --all
 
-    - name: Pull remote changes from main branch
-      run: git pull origin main
+    - name: Pull remote changes from main branch and rebase
+      run: git pull --rebase origin main
 
     - name: Pull dev branch changes
       run: git pull origin dev
