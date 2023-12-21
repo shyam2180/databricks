@@ -38,3 +38,10 @@ jobs:
   
     - name: Terraform Apply
       run: terraform apply -auto-approve
+
+    - name: Move main to dev if Terraform apply succeeds
+      if: success()
+      run: |
+        # Add your script or commands here to move main to dev
+        git branch -m main dev
+        git push origin dev
