@@ -48,12 +48,6 @@ jobs:
           exit 1
         fi
 
-    - name: Check for changes in Dev
-      id: check_changes
-      run: |
-        changes=$(git diff --name-only origin/dev)
-        echo "::set-output name=changes::$changes"
-
     - name: Merge changes to Main
       run: |
         if [ -n "${{ steps.check_changes.outputs.changes }}" ]; then
