@@ -42,13 +42,19 @@ jobs:
     - name: Move main to dev if Terraform apply succeeds
       if: success()
       run: |
+        # Rename the branch locally
         git branch -m main dev
+    
+        # Push the local dev branch to GitHub (creating a new branch)
         git push origin dev
-
+    
         # Use the GitHub token for authentication
         git push origin :main # Delete the old main branch
+    
+        # Set up tracking for the new dev branch
         git remote set-branches origin dev
         git fetch --all
         git branch -u origin/dev dev
       env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        GH_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
