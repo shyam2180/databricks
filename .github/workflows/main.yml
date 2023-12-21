@@ -64,4 +64,3 @@ jobs:
         else
           echo "No changes in Dev. Skipping merge to Main."
         fi
-
