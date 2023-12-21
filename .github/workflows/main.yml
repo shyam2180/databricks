@@ -39,12 +39,20 @@ jobs:
     - name: Terraform Apply
       run: terraform apply -auto-approve
 
-    - name: Merge changes to Main
-      run: git merge --no-ff origin/dev
-
-    - name: Push changes to Main
+    - name: Check for changes in Dev
+      id: check_changes
       run: |
-        git config --local user.email "actions@github.com"
-        git config --local user.name "GitHub Actions"
-        git push origin main
+        changes=$(git diff --name-only origin/dev)
+        echo "::set-output name=changes::$changes"
+
+    - name: Merge changes to Main
+      run: |
+        if [ -n "${{ steps.check_changes.outputs.changes }}" ]; then
+          git merge --no-ff origin/dev
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git push origin main
+        else
+          echo "No changes in Dev. Skipping merge to Main."
+        fi
 
