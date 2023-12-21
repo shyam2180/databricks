@@ -51,9 +51,6 @@ jobs:
     - name: Pull remote changes from main branch and rebase
       run: git pull --rebase origin main
 
-    - name: Pull dev branch changes
-      run: git pull origin dev
-
     - name: Push changes to main branch
       run: git push origin dev:main
   
