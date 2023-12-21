@@ -42,22 +42,21 @@ jobs:
       run: |
         if [ $? -eq 0 ]; then
           echo "Terraform apply succeeded. Proceeding to the next steps."
-
-          - name: Switch to the main branch
-            run: git checkout main
-          
-          - name: Merge changes from dev into main
-            run: git merge dev --no-ff
-
-          - name: Push changes to GitHub
-            run: git push origin main
         else
           echo "Terraform apply failed. Exiting the workflow."
           exit 1
         fi
       env:
         GH_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-
+        
+    - name: Switch to the main branch
+      run: git checkout main
+    
+    - name: Merge changes from dev into main
+      run: git merge dev --no-ff
+  
+    - name: Push changes to GitHub
+      run: git push origin main
 
     # - name: Check for changes in Dev
     #   id: check_changes
