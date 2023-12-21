@@ -39,20 +39,24 @@ jobs:
     - name: Terraform Apply
       run: terraform apply -auto-approve
 
-    - name: Merge dev into main if Terraform apply succeeds
-      if: success()
+    - name: Switch to the main branch
       run: |
-        # Switch to the main branch
-        git checkout main
-        
-        # Pull the latest changes from the remote main branch
-        git pull origin main
-        
-        # Merge changes from the dev branch into the main branch
-        git merge dev
-        
-        # Push the changes to the main branch
-        git push origin main
-        
+        git branch -a
+        if git show-ref --verify --quiet refs/heads/main; then
+          git checkout main
+        else
+          git checkout -b main
+        fi
+      shell: bash
+    
+    - name: Pull the latest changes from the remote main branch
+      run: git pull origin main
+    
+    - name: Merge dev into main
+      run: git merge dev
+    
+    - name: Push changes to the main branch
+      run: git push origin main
       env:
         GH_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+    
