@@ -50,6 +50,11 @@ jobs:
     - name: Switch to the main branch
       run: git checkout main
     
+    - name: Configure Git identity
+      run: |
+        git config --global user.email "shyamkumarr@jmangroup.com"
+        git config --global user.name "shyam2180"
+    
     - name: Pull changes from main with rebase
       run: git pull --rebase origin main
     
