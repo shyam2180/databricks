@@ -50,8 +50,8 @@ jobs:
     - name: Switch to the main branch
       run: git checkout main
     
-    - name: Pull changes from main
-      run: git pull origin main
+    - name: Pull changes from main with rebase
+      run: git pull --rebase origin main
     
     - name: Merge changes from dev into main
       run: git merge dev --no-ff
