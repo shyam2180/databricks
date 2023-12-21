@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - dev
+
 jobs:
   update_and_push:
     runs-on: ubuntu-latest
@@ -14,13 +15,6 @@ jobs:
       with:
         ref: dev
 
-    # - name: Azure Login
-    #   run: |
-    #     az login --identity
-    #     az account set --subscription
-    #   env:
-    #     AZURE_GITHUB_TOKEN: ${{ secrets.AZURE_GITHUB_TOKEN }}
-    
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       with:
@@ -48,7 +42,11 @@ jobs:
         fi
       env:
         GH_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-        
+    
+    - name: Ensure main branch exists
+      run: |
+        git show-ref --verify --quiet "refs/heads/main" || git branch main
+    
     - name: Switch to the main branch
       run: git checkout main
     
@@ -57,21 +55,3 @@ jobs:
   
     - name: Push changes to GitHub
       run: git push origin main
-
-    # - name: Check for changes in Dev
-    #   id: check_changes
-    #   run: |
-    #     changes=$(git diff --name-only origin/dev)
-    #     echo "Changes detected: $changes"
-    #     echo "::set-output name=changes::$changes"
-    
-    # - name: Merge changes to Main
-    #   run: |
-    #     if [ -n "${{ steps.check_changes.outputs.changes }}" ]; then
-    #       git merge --no-ff origin/dev
-    #       git config --local user.email "actions@github.com"
-    #       git config --local user.name "GitHub Actions"
-    #       git push origin main
-    #     else
-    #       echo "No changes in Dev. Skipping merge to Main."
-    #     fi
