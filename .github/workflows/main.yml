@@ -39,24 +39,18 @@ jobs:
     - name: Terraform Apply
       run: terraform apply -auto-approve
 
-    - name: Switch to the main branch
+    - name: Set up Git credentials  # Securely store and use a personal access token
       run: |
-        git branch -a
-        if git show-ref --verify --quiet refs/heads/main; then
-          git checkout main
-        else
-          git checkout -b main
-        fi
-      shell: bash
-    
-    - name: Pull the latest changes from the remote main branch
-      run: git pull origin main
-    
-    - name: Merge dev into main
-      run: git merge dev
-    
-    - name: Push changes to the main branch
-      run: git push origin main
-      env:
-        GH_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-    
+        git config --global user.email "shyamkumarr@jmangroup.com"
+        git config --global user.name "shyam2180"
+        echo "https://${GH_TOKEN}@github.com" >> ~/.git-credentials
+
+    - name: Fetch latest changes
+      run: git fetch --all
+
+    - name: Pull dev branch changes
+      run: git pull origin dev
+
+    - name: Push changes to main branch
+      run: git push origin dev:main
+  
