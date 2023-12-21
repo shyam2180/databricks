@@ -59,7 +59,7 @@ jobs:
       run: git pull --rebase origin main
     
     - name: Merge changes from dev into main
-      run: git merge dev --no-ff
+      run: git merge dev --allow-unrelated-histories
   
     - name: Push changes to GitHub
       run: git push origin main
