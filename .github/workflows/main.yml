@@ -48,7 +48,8 @@ jobs:
         git show-ref --verify --quiet "refs/heads/main" || git branch main
     
     - name: Switch to the main branch
-      run: git checkout main
+      run: |
+        git checkout main
     
     - name: Configure Git identity
       run: |
@@ -78,6 +79,3 @@ jobs:
         git push origin main
       env:
         GH_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-
-    - name: Create prod branch based on main
-      run: git checkout -b prod main
