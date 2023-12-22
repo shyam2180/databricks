@@ -48,8 +48,7 @@ jobs:
         git show-ref --verify --quiet "refs/heads/main" || git branch main
     
     - name: Switch to the main branch
-      run: |
-        git checkout main
+      run: git checkout main
     
     - name: Configure Git identity
       run: |
@@ -57,25 +56,10 @@ jobs:
         git config --global user.name "shyam2180"
     
     - name: Pull changes from main with rebase
-      run: |
-        git pull --rebase origin main || true  # Continue even if there are conflicts
-    
-        if [ $? -ne 0 ]; then
-          echo "Conflicts occurred during rebase. Please resolve conflicts manually."
-          exit 1
-        fi
+      run: git pull --rebase origin main
     
     - name: Merge changes from dev into main
-      run: |
-        git merge dev --allow-unrelated-histories || true  # Continue even if there are conflicts
-    
-        if [ $? -ne 0 ]; then
-          echo "Conflicts occurred during merge. Please resolve conflicts manually."
-          exit 1
-        fi
+      run: git merge dev --allow-unrelated-histories
   
     - name: Push changes to GitHub
-      run: |
-        git push origin main
-      env:
-        GH_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+      run: git push origin main
