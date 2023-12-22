@@ -56,10 +56,7 @@ jobs:
         git config --global user.name "shyam2180"
     
     - name: Pull changes from main with rebase
-      run: | 
-        git add .github/workflows/main.yml
-        git rebase --continue
-
+      run: git pull --rebase origin main || true  # Use '|| true' to continue even if there are conflicts
     
     - name: Merge changes from dev into main
       run: git merge dev --allow-unrelated-histories
