@@ -63,3 +63,6 @@ jobs:
   
     - name: Push changes to GitHub
       run: git push origin main
+      
+    - name: Create prod branch based on main
+      run: git checkout -b prod main
