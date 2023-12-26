@@ -56,7 +56,16 @@ jobs:
       run: |
         git checkout main
     
-    - name: Switch to dev branch
+    - name: Fetch changes from main branch
+      run: |
+        git fetch origin main
+    
+    - name: Merge changes from main into dev
+      run: |
+        git checkout main
+        git merge origin/main
+    
+    - name: Switch back to dev branch
       run: git checkout dev
     
     - name: Pull changes from dev branch
@@ -66,16 +75,6 @@ jobs:
       run: |
         git checkout main
         git merge dev --allow-unrelated-histories
-    
-    - name: Resolve conflicts manually
-      run: |
-        # Open files in your code editor, resolve conflicts manually
-        # After resolving conflicts, continue with the next steps
-    
-    - name: Stage and commit changes
-      run: |
-        git add .
-        git commit -m "Merge dev into main"
     
     - name: Push changes to GitHub
       run: git push origin main
