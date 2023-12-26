@@ -55,11 +55,11 @@ jobs:
         git config --global user.email "shyamkumarr@jmangroup.com"
         git config --global user.name "shyam2180"
     
-    - name: Pull changes from main with rebase
-      run: git pull --rebase origin main
+    - name: Fetch changes from the remote main branch
+      run: git fetch origin main
     
-    - name: Merge changes from dev into main
-      run: git merge dev --allow-unrelated-histories
-  
+    - name: Rebase main branch with dev
+      run: git pull --rebase origin dev
+    
     - name: Push changes to GitHub
       run: git push origin main
