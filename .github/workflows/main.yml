@@ -62,4 +62,4 @@ jobs:
       run: git pull --rebase origin dev
     
     - name: Push changes to GitHub
-      run: git push origin main
+      run: git push --force-with-lease origin main
