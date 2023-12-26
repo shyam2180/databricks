@@ -13,5 +13,4 @@ data = {
 df = pd.DataFrame(data)
 
 # Print the DataFrame
-#shyam
 print(df)
