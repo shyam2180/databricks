@@ -46,7 +46,12 @@ jobs:
     - name: Ensure main branch exists
       run: |
         git show-ref --verify --quiet "refs/heads/main" || git branch main
-    
+        
+    - name: Configure Git identity
+      run: |
+        git config --global user.email "shyamkumarr@jmangroup.com"
+        git config --global user.name "shyam2180"
+        
     - name: Switch to the main branch
       run: |
         git checkout main
