@@ -1,3 +1,4 @@
+
 name: Update Databricks Notebook and Push to GitHub
 
 on:
@@ -56,15 +57,10 @@ jobs:
         git config --global user.name "shyam2180"
     
     - name: Pull changes from main with rebase
-      run: |
-        git pull --rebase origin main || true
+      run: git pull --rebase origin main
     
     - name: Merge changes from dev into main
       run: git merge dev --allow-unrelated-histories
-    # Manually resolve conflicts here
-
-    - name: Continue the merge
-      run: git merge --continue
   
     - name: Push changes to GitHub
       run: git push origin main
