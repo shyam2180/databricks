@@ -47,9 +47,10 @@ jobs:
       run: |
         git show-ref --verify --quiet "refs/heads/main" || git branch main
     
-    - name: Switch to the main branch
+    - name: Switch to the main branch and configure pull strategy
       run: |
         git checkout main
+        git config pull.rebase true
         git reset --hard HEAD
         git pull origin main
     
