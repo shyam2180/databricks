@@ -11,6 +11,6 @@ data = {
 
 # Create a DataFrame using pandas
 df = pd.DataFrame(data)
-# here is upadte
+
 # Print the DataFrame
 print(df)
