@@ -11,6 +11,6 @@ data = {
 
 # Create a DataFrame using pandas
 df = pd.DataFrame(data)
-# shyam
+
 # Print the DataFrame
 print(df)
