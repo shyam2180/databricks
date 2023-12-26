@@ -56,7 +56,8 @@ jobs:
         git config --global user.name "shyam2180"
     
     - name: Pull changes from main with rebase
-      run: git pull --rebase origin main
+      run: |
+        git pull --rebase origin main || true
     
     - name: Merge changes from dev into main
       run: git merge dev --allow-unrelated-histories
