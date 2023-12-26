@@ -5,7 +5,7 @@ import pandas as pd
 # Dummy data
 data = {
     'Name': ['John', 'Jane', 'Bob'],
-    'Age': [25, 30, 22],
+    'Age': [255, 350, 252],
     'City': ['New York', 'San Francisco', 'Los Angeles']
 }
 
