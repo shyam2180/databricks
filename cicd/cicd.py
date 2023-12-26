@@ -4,8 +4,8 @@ import pandas as pd
 
 # Dummy data
 data = {
-    'Name': ['Johny', 'Jane', 'Bob'],
-    'Age': [255, 350, 252],
+    'Name': ['John', 'Jane', 'Bob'],
+    'Age': [25, 30, 22],
     'City': ['New York', 'San Francisco', 'Los Angeles']
 }
 
