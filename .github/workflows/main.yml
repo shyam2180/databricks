@@ -61,6 +61,10 @@ jobs:
     
     - name: Merge changes from dev into main
       run: git merge dev --allow-unrelated-histories
+    # Manually resolve conflicts here
+
+    - name: Continue the merge
+      run: git merge --continue
   
     - name: Push changes to GitHub
       run: git push origin main
