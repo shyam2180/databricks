@@ -63,7 +63,7 @@ jobs:
     - name: Merge changes from main into dev
       run: |
         git checkout main
-        git merge origin/main
+        git merge origin/main --allow-unrelated-histories
     
     - name: Switch back to dev branch
       run: git checkout dev
